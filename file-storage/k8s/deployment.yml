@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netatalk
+  namespace: files
+  labels:
+    app: netatalk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netatalk
+  template:
+    metadata:
+      labels:
+        app: netatalk
+    spec:
+      containers:
+      - name: netatalk
+        image: cptactionhank/netatalk:latest
+        ports:
+        - containerPort: 548
+        volumeMounts:
+          - mountPath: /media/share
+            name: netatalk-pv
+        env:
+          - name: AFP_USER
+            valueFrom:
+              secretKeyRef:
+                key: AFP_USER
+                name: netatalk-secret
+          - name: AFP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: AFP_PASSWORD
+                name: netatalk-secret
+      volumes:
+        - name: netatalk-pv
+          persistentVolumeClaim:
+            claimName: netatalk-pv

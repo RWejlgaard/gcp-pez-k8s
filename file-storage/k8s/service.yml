@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: afp
+  namespace: files
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 548
+    targetPort: 548
+    protocol: TCP
+  selector:
+    app: netatalk

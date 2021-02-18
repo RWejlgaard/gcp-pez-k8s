@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: pezsh
-        image: gcr.io/rwejlgaard/pez.sh:latest
+        image: gcr.io/rwejlgaard/pez.sh:${SEMVER}
         imagePullPolicy: Always
         ports:
         - containerPort: 80

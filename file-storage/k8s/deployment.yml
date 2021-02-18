@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: netatalk
-        image: cptactionhank/netatalk:latest
+        image: gcr.io/rwejlgaard/netatalk:${SEMVER}
         ports:
         - containerPort: 548
         volumeMounts:

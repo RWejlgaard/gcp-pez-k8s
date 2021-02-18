@@ -6,7 +6,7 @@ Personal GKE kubernetes stack
 .
 ├── README.md
 └── <module name>
-    ├── deploy.sh     # deploy script for module
+    ├── Makefile
     ├── k8s
     │   ├── ...
     │   └── <any kind of k8s yaml>
@@ -15,3 +15,10 @@ Personal GKE kubernetes stack
         ├── <supporting files/folders for image>
         └── Dockerfile
 ```
+
+## Modules
+|Module|Status|Description|
+|---|---|---|
+|pez.sh|Implemented|Personal website/portfolio|
+|file-storage|Implemented|Personal cloud storage (AFP)|
+|||

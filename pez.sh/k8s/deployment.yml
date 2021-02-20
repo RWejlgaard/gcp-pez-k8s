@@ -6,7 +6,7 @@ metadata:
     app: pezsh
   namespace: web
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: pezsh
@@ -15,9 +15,24 @@ spec:
       labels:
         app: pezsh
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - pezsh
+                topologyKey: "kubernetes.io/hostname"
       containers:
       - name: pezsh
         image: gcr.io/rwejlgaard/pez.sh:${SEMVER}
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
+#        - name: https
+#          containerPort: 443

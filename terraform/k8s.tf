@@ -4,12 +4,18 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_container_cluster" "k8s" {
+  provider = google-beta
   name               = "k8s"
   location           = "europe-west1-c"
   remove_default_node_pool = true
   initial_node_count = 1
   release_channel {
     channel = "RAPID"
+  }
+  addons_config {
+    istio_config {
+      disabled = false
+    }
   }
 }
 

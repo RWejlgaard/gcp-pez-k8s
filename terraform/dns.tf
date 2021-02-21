@@ -18,7 +18,7 @@ resource "google_dns_record_set" "protonmail-spf" {
   ttl  = 300
 
   managed_zone = google_dns_managed_zone.pez-zone.name
-  rrdatas = ["\"v=spf1 include:_spf.protonmail.ch mx ~all\""]
+  rrdatas = ["v=spf1 include:_spf.protonmail.ch mx ~all"]
 }
 
 resource "google_dns_record_set" "protonmail-dmarc" {
@@ -27,7 +27,7 @@ resource "google_dns_record_set" "protonmail-dmarc" {
   ttl  = 300
 
   managed_zone = google_dns_managed_zone.pez-zone.name
-  rrdatas = ["\"v=DMARC1; p=none; rua=mailto:pez@pez.sh\""]
+  rrdatas = ["v=DMARC1; p=none; rua=mailto:pez@pez.sh"]
 }
 
 resource "google_dns_record_set" "protonmail-dkim" {

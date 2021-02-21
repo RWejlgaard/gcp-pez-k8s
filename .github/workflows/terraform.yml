@@ -38,21 +38,21 @@ jobs:
       with:
         cluster_name: k8s
         location: europe-west1-c
-        credentials: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+        credentials: ${{ secrets.GCP_CREDENTIALS_PATH }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
       working-directory: ${{env.working-directory}}
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS_PATH }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan
       working-directory: ${{env.working-directory}}
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS_PATH }}
 
       # On push to master, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -61,4 +61,4 @@ jobs:
       run: terraform apply -auto-approve
       working-directory: ${{env.working-directory}}
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS_PATH }}

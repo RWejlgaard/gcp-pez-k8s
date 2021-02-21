@@ -50,6 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./terraform
+    needs: kube-apply
       
     defaults:
       run:

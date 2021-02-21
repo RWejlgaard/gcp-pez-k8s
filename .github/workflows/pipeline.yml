@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Pipeline'
 
 on:
   push:
@@ -7,6 +7,44 @@ on:
   pull_request:
 
 jobs:
+  kube-apply:
+    name: 'Kubernetes Apply'
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Get GKE Credentials
+      uses: google-github-actions/get-gke-credentials@main
+      with:
+        cluster_name: k8s
+        location: europe-west1-c
+        
+    - name: Copy kube-config to home
+      run: mkdir -p ~/.kube && cp ${{env.KUBECONFIG}} ~/.kube/config
+
+    - name: Install kubectl
+      run: gcloud components install kubectl --quiet
+      
+    - name: Apply modules
+      run: |
+        for i in $(ls -d */ | grep -v terraform); do
+          printf "Running Make on: ${i} \n"
+          make -C "./${i}" apply
+        done
+
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest

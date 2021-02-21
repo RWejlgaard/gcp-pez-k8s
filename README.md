@@ -21,4 +21,4 @@ Personal GKE kubernetes stack
 |---|---|---|
 |pez.sh|Implemented|Personal website/portfolio|
 |file-storage|Implemented|Personal cloud storage (AFP)|
-|||
+|redis|Implemented|redis service for future projects|

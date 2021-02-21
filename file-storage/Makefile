@@ -11,7 +11,7 @@ build:
 apply: export SEMVER=$(CURRENT_VERSION)
 apply:
 	kubectl apply -f k8s/netatalk-pv.yml
-	kubectl apply -f k8s/sealed-secret.yml
+	kubectl apply -f k8s/sealed-secret.json
 	envsubst < k8s/deployment.yml | kubectl -n $(NS) apply -f -
 	kubectl apply -f k8s/service.yml
 	kubectl delete pod -n $(NS) -l app=netatalk

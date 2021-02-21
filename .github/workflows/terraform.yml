@@ -43,6 +43,8 @@ jobs:
     - name: Terraform Init
       run: terraform init
       working-directory: ${{env.working-directory}}
+      env:
+        TF_VAR_KUBECONFIG: ${{env.KUBECONFIG}}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan

@@ -23,10 +23,10 @@ resource "google_container_node_pool" "k8s-nodes" {
   name       = "k8s-pool"
   location   = "europe-west1-c"
   cluster    = google_container_cluster.k8s.name
-  node_count = 1
+  node_count = 3
 
   node_config {
-    machine_type = "e2-medium"
+    machine_type = "e2-standard-2"
     preemptible = true
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     service_account = google_service_account.service_account.email

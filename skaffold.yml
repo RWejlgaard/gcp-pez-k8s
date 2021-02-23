@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+build:
+  googleCloudBuild:
+    projectId: rwejlgaard
+  artifacts:
+    - image: gcr.io/rwejlgaard/pez.sh
+      context: pez.sh/src
+    - image: gcr.io/rwejlgaard/redis
+      context: redis/src
+    - image: gcr.io/rwejlgaard/netatalk
+      context: file-storage/src
+deploy:
+  kubectl:
+    manifests:
+      - pez.sh/k8s/*.yml
+      - redis/k8s/*.yml
+      - file-storage/k8s/*.yml

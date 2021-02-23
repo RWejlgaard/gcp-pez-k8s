@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: gcr.io/rwejlgaard/redis:${SEMVER}
+        image: gcr.io/rwejlgaard/redis
         ports:
         - containerPort: 6379
         env:

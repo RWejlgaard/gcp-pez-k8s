@@ -17,12 +17,9 @@ spec:
     spec:
       containers:
       - name: netatalk
-        image: gcr.io/rwejlgaard/netatalk:${SEMVER}
+        image: gcr.io/rwejlgaard/netatalk
         ports:
         - containerPort: 548
-        volumeMounts:
-          - mountPath: /media/share
-            name: netatalk-pv
         env:
           - name: AFP_USER
             valueFrom:
@@ -34,6 +31,9 @@ spec:
               secretKeyRef:
                 key: AFP_PASSWORD
                 name: netatalk-secret
+        volumeMounts:
+          - mountPath: /media/share
+            name: netatalk-pv
       volumes:
         - name: netatalk-pv
           persistentVolumeClaim:

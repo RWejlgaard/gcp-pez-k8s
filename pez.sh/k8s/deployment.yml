@@ -29,7 +29,7 @@ spec:
                 topologyKey: "kubernetes.io/hostname"
       containers:
       - name: pezsh
-        image: gcr.io/rwejlgaard/pez.sh:${SEMVER}
+        image: gcr.io/rwejlgaard/pez.sh
         imagePullPolicy: Always
         ports:
         - name: http

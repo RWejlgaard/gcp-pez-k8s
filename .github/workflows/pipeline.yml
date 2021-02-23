@@ -35,15 +35,14 @@ jobs:
     - name: Copy kube-config to home
       run: mkdir -p ~/.kube && cp ${{env.KUBECONFIG}} ~/.kube/config
 
+    - name: Install skaffold
+      run: gcloud components install skaffold --quiet
+
     - name: Build Skaffold pipeline
-      uses: hiberbee/github-action-skaffold@latest
-      with:
-        command: build
+      run: skaffold build
 
     - name: Run Skaffold pipeline
-      uses: hiberbee/github-action-skaffold@latest
-      with:
-        command: run
+      run: skaffold run
 
   terraform:
     name: 'Terraform'

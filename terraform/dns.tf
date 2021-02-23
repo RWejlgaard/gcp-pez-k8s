@@ -35,7 +35,7 @@ resource "google_dns_record_set" "protonmail-dkim" {
 }
 
 resource "google_dns_record_set" "protonmail-mx" {
-  name = "@.${google_dns_managed_zone.pez-zone.dns_name}"
+  name = google_dns_managed_zone.pez-zone.dns_name
   type = "MX"
   ttl  = 3600
 

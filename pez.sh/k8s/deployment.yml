@@ -15,18 +15,6 @@ spec:
       labels:
         app: pezsh
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app
-                      operator: In
-                      values:
-                        - pezsh
-                topologyKey: "kubernetes.io/hostname"
       containers:
       - name: pezsh
         image: gcr.io/rwejlgaard/pez.sh

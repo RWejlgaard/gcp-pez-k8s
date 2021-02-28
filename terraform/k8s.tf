@@ -14,7 +14,7 @@ resource "google_container_cluster" "k8s" {
   }
   addons_config {
     istio_config {
-      disabled = false
+      disabled = true
     }
   }
 }
@@ -24,11 +24,14 @@ resource "google_container_node_pool" "k8s-nodes" {
   location   = "europe-west1-c"
   cluster    = google_container_cluster.k8s.name
   node_count = 3
+  autoscaling {
+    max_node_count = 4
+    min_node_count = 1
+  }
 
   node_config {
     machine_type = "e2-standard-2"
     preemptible = true
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     service_account = google_service_account.service_account.email
     oauth_scopes    = [
       "https://www.googleapis.com/auth/cloud-platform"

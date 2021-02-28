@@ -13,6 +13,6 @@ build:
 deploy:
   kubectl:
     manifests:
-      - pez.sh/k8s/*.yml
-      - redis/k8s/*.yml
-      - file-storage/k8s/*.yml
+      - pez.sh/k8s/*
+      - redis/k8s/*
+      - file-storage/k8s/*

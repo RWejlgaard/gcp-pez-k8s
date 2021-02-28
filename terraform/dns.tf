@@ -4,13 +4,13 @@ resource "google_dns_managed_zone" "pez-zone" {
 }
 
 resource "google_dns_record_set" "protonmail-spf" {
-  name = "@.${google_dns_managed_zone.pez-zone.dns_name}"
+  name = google_dns_managed_zone.pez-zone.dns_name
   type = "TXT"
   ttl  = 300
 
   managed_zone = google_dns_managed_zone.pez-zone.name
   rrdatas = [
-    "protonmail-verification=155e9262046dc386cbc7c1b52b58977b856d32bc",
+    "\"protonmail-verification=155e9262046dc386cbc7c1b52b58977b856d32bc\"",
     "\"v=spf1\" \"include:_spf.protonmail.ch\" \"mx\" \"~all\""
   ]
 }

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudprober
+  namespace: monitoring
+  labels:
+    app: cloudprober
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudprober
+  template:
+    metadata:
+      labels:
+        app: cloudprober
+    spec:
+      containers:
+      - name: cloudprober
+        image: gcr.io/rwejlgaard/cloudprober
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /etc/cloudprober
+            name: config
+        ports:
+          - name: http
+            containerPort: 80
+        env:
+          - name: CLOUDPROBER_PORT
+            value: "80"
+      volumes:
+        - name: config
+          configMap:
+            name: cloudprober-config

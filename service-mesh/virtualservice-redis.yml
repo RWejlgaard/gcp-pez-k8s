@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: redis-vs
+spec:
+  hosts:
+  - "redis.pez.sh"
+  gateways:
+  - pezsh-gateway
+  tcp:
+  - route:
+    - destination:
+        host: redis.redis.svc.cluster.local

@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: pezsh-vs
+spec:
+  hosts:
+  - "pez.sh"
+  - "www.pez.sh"
+  gateways:
+  - pezsh-gateway
+  http:
+  - route:
+    - destination:
+        host: pezsh.web.svc.cluster.local

@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: cloudprober-vs
+spec:
+  hosts:
+  - "cloudprober.pez.sh"
+  gateways:
+  - pezsh-gateway
+  http:
+    - route:
+        - destination:
+            host: cloudprober.monitoring.svc.cluster.local

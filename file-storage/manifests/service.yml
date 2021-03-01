@@ -4,7 +4,7 @@ metadata:
   name: afp
   namespace: files
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 548
     targetPort: 548

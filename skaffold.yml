@@ -10,9 +10,13 @@ build:
       context: redis/src
     - image: gcr.io/rwejlgaard/netatalk
       context: file-storage/src
+    - image: gcr.io/rwejlgaard/cloudprober
+      context: cloudprober/src
 deploy:
   kubectl:
     manifests:
-      - pez.sh/k8s/*
-      - redis/k8s/*
-      - file-storage/k8s/*
+      - service-mesh/*
+      - pez.sh/manifests/*
+      - cloudprober/manifests/*
+      - redis/manifests/*
+      - file-storage/manifests/*

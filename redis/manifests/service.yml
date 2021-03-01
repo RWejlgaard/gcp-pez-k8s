@@ -4,10 +4,10 @@ metadata:
   name: redis
   namespace: redis
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 6379
     targetPort: 6379
-    protocol: TCP
+    appProtocol: redis
   selector:
     app: redis

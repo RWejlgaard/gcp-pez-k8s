@@ -12,4 +12,13 @@ spec:
         protocol: HTTP
       hosts:
         - "pez.sh"
-        - "*.pez.sh"
+        - "www.pez.sh"
+        - "cloudprober.pez.sh"
+        - "grafana.pez.sh"
+        - "prometheus.pez.sh"
+    - port:
+        number: 6379
+        name: tcp
+        protocol: TCP
+      hosts:
+        - "redis.pez.sh"

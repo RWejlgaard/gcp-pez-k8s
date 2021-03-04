@@ -11,6 +11,6 @@ data:
       targets {
         host_names: "pez.sh"
       }
-      interval_msec: 5000
+      interval_msec: 500
       timeout_msec: 1000
     }

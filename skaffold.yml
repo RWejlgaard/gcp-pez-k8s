@@ -20,3 +20,5 @@ deploy:
       - cloudprober/manifests/*
       - redis/manifests/*
       - file-storage/manifests/*
+      - grafana/manifests/*
+      - prometheus/manifests/*

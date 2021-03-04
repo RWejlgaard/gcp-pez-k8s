@@ -3,7 +3,7 @@ name: 'Pipeline'
 on:
   push:
     branches:
-    - master
+    - master_DISABLE
   pull_request:
 
 jobs:

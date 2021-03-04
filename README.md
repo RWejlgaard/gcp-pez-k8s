@@ -5,9 +5,9 @@ Personal GKE kubernetes stack
 ```
 .
 ├── README.md
+├── skaffold.yml
 └── <module name>
-    ├── Makefile
-    ├── k8s
+    ├── manifests
     │   ├── ...
     │   └── <any kind of k8s yaml>
     └── src
@@ -19,6 +19,10 @@ Personal GKE kubernetes stack
 ## Modules
 |Module|Status|Description|
 |---|---|---|
-|pez.sh|Implemented|Personal website/portfolio|
-|file-storage|Implemented|Personal cloud storage (AFP)|
-|redis|Implemented|redis service for future projects|
+|`pez.sh`|Implemented|Personal website/portfolio|
+|`file-storage`|Implemented|Personal cloud storage (AFP)|
+|`redis`|Implemented|redis service for future projects|
+|`cloudprober`|Implemented|Provide uptime monitoring for pez.sh|
+|`grafana`|Implemented|Grafana stuff|
+|`prometheus`|Implemented|Prometheus|
+|`service-mesh`|Implemented|Istio control plane, gateway on pez.sh pointing to various virtual-services|

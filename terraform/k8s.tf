@@ -30,7 +30,7 @@ resource "google_container_node_pool" "k8s-nodes" {
   }
 
   node_config {
-    machine_type = "e2-standard-2"
+    machine_type = "n2-standard-2"
     preemptible = true
     service_account = google_service_account.service_account.email
     oauth_scopes    = [

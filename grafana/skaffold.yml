@@ -1,0 +1,9 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+build:
+  googleCloudBuild:
+    projectId: rwejlgaard
+deploy:
+  kubectl:
+    manifests:
+      - manifests/*

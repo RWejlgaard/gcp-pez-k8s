@@ -52,10 +52,6 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    app.kubernetes.io/instance: grafana
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: grafana
-    app.kubernetes.io/version: 7.2.1
-    helm.sh/chart: grafana-5.8.10
+    app: grafana
   name: grafana
-  namespace: istio-system
+  namespace: monitoring

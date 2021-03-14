@@ -6,34 +6,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/instance: grafana
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: grafana
-    app.kubernetes.io/version: 7.2.1
-    helm.sh/chart: grafana-5.8.10
+    app: grafana
   name: grafana
-  namespace: istio-system
+  namespace: monitoring
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app.kubernetes.io/instance: grafana
-      app.kubernetes.io/name: grafana
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+      app: grafana
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "false"
       labels:
         app: grafana
-        app.kubernetes.io/instance: grafana
-        app.kubernetes.io/name: grafana
     spec:
       containers:
       - env:
@@ -107,13 +93,10 @@ spec:
             subPath: dashboardproviders.yaml
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      schedulerName: default-scheduler
       securityContext:
         fsGroup: 472
         runAsGroup: 472
         runAsUser: 472
-      serviceAccountName: grafana
-      terminationGracePeriodSeconds: 30
       volumes:
       - configMap:
           defaultMode: 420

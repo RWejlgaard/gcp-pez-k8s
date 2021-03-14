@@ -3,10 +3,33 @@
 # reopened with the relevant failures.
 #
 apiVersion: v1
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+  namespace: monitoring
 data:
   alerting_rules.yml: |
-    {}
+    groups:
+    - name: Availability
+      rules:
+      - alert: HighRequestLatency
+        expr: ((rate(latency[1m])) / (rate(success[1m])) / 1000) > 100
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: High request latency
+      - alert: SiteUnreachable
+        expr: sum(rate(resp_code{code=~"2.."}[1m])) by (probe) <= 0
+        for: 2m
+        labels:
+          severity: page
+        annotations:
+          summary: Site Unreachable
   alerts: |
+    {}
+  pagerduty.yml: |
     {}
   prometheus.yml: |
     global:
@@ -18,6 +41,7 @@ data:
     - /etc/config/alerting_rules.yml
     - /etc/config/rules
     - /etc/config/alerts
+    # - /etc/config/pagerduty.yml
     scrape_configs:
     - job_name: 'cloudprober'
       scrape_interval: 10s
@@ -271,12 +295,3 @@ data:
   rules: |
     {}
 kind: ConfigMap
-metadata:
-  labels:
-    app: prometheus
-    chart: prometheus-11.16.2
-    component: server
-    heritage: Helm
-    release: prometheus
-  name: prometheus
-  namespace: istio-system

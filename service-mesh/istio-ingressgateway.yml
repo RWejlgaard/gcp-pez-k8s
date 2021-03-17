@@ -33,6 +33,11 @@ spec:
       port: 6379
       protocol: TCP
       targetPort: 56379
+    - name: netatalk
+      nodePort: 30380
+      port: 548
+      protocol: TCP
+      targetPort: 56378
     - name: status-port
       nodePort: 30553
       port: 15021

@@ -79,10 +79,6 @@ spec:
             subPath: grafana.ini
           - mountPath: /var/lib/grafana
             name: storage
-          - mountPath: /var/lib/grafana/dashboards/istio
-            name: dashboards-istio
-          - mountPath: /var/lib/grafana/dashboards/istio-services
-            name: dashboards-istio-services
           - mountPath: /etc/grafana/provisioning/datasources/datasources.yaml
             name: config
             subPath: datasources.yaml
@@ -102,14 +98,6 @@ spec:
           defaultMode: 420
           name: grafana
         name: config
-      - configMap:
-          defaultMode: 420
-          name: istio-grafana-dashboards
-        name: dashboards-istio
-      - configMap:
-          defaultMode: 420
-          name: istio-services-grafana-dashboards
-        name: dashboards-istio-services
       - configMap:
           defaultMode: 420
           name: cloudprober-grafana-dashboards

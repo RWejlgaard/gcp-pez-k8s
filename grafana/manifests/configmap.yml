@@ -8,18 +8,6 @@ data:
     apiVersion: 1
     providers:
     - disableDeletion: false
-      name: istio
-      options:
-        path: /var/lib/grafana/dashboards/istio
-      orgId: 1
-      type: file
-    - disableDeletion: false
-      name: istio-services
-      options:
-        path: /var/lib/grafana/dashboards/istio-services
-      orgId: 1
-      type: file
-    - disableDeletion: false
       name: cloudprober-dashboards
       options:
         path: /var/lib/grafana/dashboards/cloudprober

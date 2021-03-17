@@ -14,3 +14,21 @@ data:
       interval_msec: 500
       timeout_msec: 1000
     }
+    probe {
+      name: "cloudprober"
+      type: HTTP
+      targets {
+        host_names: "cloudprober.pez.sh/status"
+      }
+      interval_msec: 500
+      timeout_msec: 1000
+    }
+    probe {
+      name: "grafana"
+      type: HTTP
+      targets {
+        host_names: "grafana.pez.sh"
+      }
+      interval_msec: 500
+      timeout_msec: 1000
+    }

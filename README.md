@@ -1,7 +1,24 @@
 # pez-k8s
 Personal GKE kubernetes stack
 
-## Structure
+## Infrastructure
+
+Below an overview of the current infrastructure.
+
+![Infra Overview](.docs/infra.png)
+
+### Cloudflare
+I went with Cloudflare to provide easy security and analytics for the traffic going through `pez.sh`
+
+Install is easy - setting the namespaces on a domain level to point to cloudflare and running the quick setup to clone DNS records
+
+Cloudflare is also supported by terraform which is pretty cool
+
+### Google Cloud
+The project's brain is hosted in GKE
+
+## File Structure
+_sidenote: I'm switching to helm on another branch in this repo, stucture will change soon_
 ```
 .
 ├── README.md

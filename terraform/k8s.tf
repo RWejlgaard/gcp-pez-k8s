@@ -17,6 +17,12 @@ resource "google_container_cluster" "k8s" {
       disabled = true
     }
   }
+  master_authorized_networks_config {
+    cidr_blocks {
+      cidr_block = "${google_compute_address.static.address}/32"
+      display_name = "vpn"
+    }
+  }
 }
 
 resource "google_container_node_pool" "k8s-nodes" {

@@ -31,6 +31,7 @@ provider "cloudflare" {
 
 provider "google" {
   project = "rwejlgaard"
+  zone = "europe-west2-c"
 }
 
 data "google_client_config" "client-config" {}

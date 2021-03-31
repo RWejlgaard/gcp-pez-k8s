@@ -30,3 +30,10 @@ resource "cloudflare_record" "istio-endpoint" {
   type = "A"
   proxied = true
 }
+
+resource "cloudflare_record" "keybase-proof" {
+  zone_id = cloudflare_zone.pezsh.id
+  name = "pez.sh"
+  type = "TXT"
+  value = "keybase-site-verification=w-WPdr0goQDQdGc_wgTh6ca50zKQnZ1agh9kOzw_sNo"
+}

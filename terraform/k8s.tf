@@ -45,3 +45,13 @@ resource "google_container_node_pool" "k8s-nodes" {
   }
 }
 
+resource "kubernetes_storage_class" "retain" {
+  metadata {
+    name = "retain"
+  }
+  reclaim_policy = "Retain"
+  storage_provisioner = "kubernetes.io/gce-pd"
+  parameters = {
+    type = "pd-ssd"
+  }
+}

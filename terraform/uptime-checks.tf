@@ -33,7 +33,7 @@ resource "google_monitoring_alert_policy" "pezsh-alert" {
     display_name = "Uptime Checks Failed"
 
     condition_threshold {
-      duration = "300s"
+      duration = "60s"
       filter = <<-EOT
         metric.type="monitoring.googleapis.com/uptime_check/check_passed"
         resource.type="uptime_url"
@@ -46,7 +46,8 @@ resource "google_monitoring_alert_policy" "pezsh-alert" {
         alignment_period = "120s"
         cross_series_reducer = "REDUCE_COUNT_FALSE"
         group_by_fields = [
-          "resource.*"]
+          "resource.*"
+        ]
         per_series_aligner = "ALIGN_NEXT_OLDER"
       }
       trigger {
@@ -88,7 +89,7 @@ resource "google_monitoring_alert_policy" "grafana-alert" {
     display_name = "Uptime Checks Failed"
 
     condition_threshold {
-      duration = "300s"
+      duration = "60s"
       filter = <<-EOT
         metric.type="monitoring.googleapis.com/uptime_check/check_passed"
         resource.type="uptime_url"
@@ -143,7 +144,7 @@ resource "google_monitoring_alert_policy" "cloudprober-alert" {
     display_name = "Uptime Checks Failed"
 
     condition_threshold {
-      duration = "300s"
+      duration = "60s"
       filter = <<-EOT
         metric.type="monitoring.googleapis.com/uptime_check/check_passed"
         resource.type="uptime_url"

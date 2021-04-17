@@ -71,7 +71,7 @@ spec:
           secretName: pagerduty-secret
         name: pagerduty-volume
       - persistentVolumeClaim:
-          claimName: prometheus-pv
+          claimName: prometheus-pvc
         name: storage-volume
       - configMap:
           name: alertmanager

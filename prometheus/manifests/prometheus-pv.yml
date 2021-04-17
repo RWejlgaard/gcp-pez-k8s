@@ -1,11 +1,30 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
   name: prometheus-pv
   namespace: monitoring
 spec:
+  storageClassName: "retain"
+  capacity:
+    storage: 50G
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: monitoring
+    name: prometheus-pvc
+  gcePersistentDisk:
+    pdName: pd-prometheus-gke
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-pvc
+  namespace: monitoring
+spec:
+  storageClassName: "retain"
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 50Gi
+      storage: 50G

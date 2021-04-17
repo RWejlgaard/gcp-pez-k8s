@@ -8,3 +8,4 @@
 
 /logs
 .pagerduty_api_key.txt
+.cloudflare_api_key.txt

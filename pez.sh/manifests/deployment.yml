@@ -24,3 +24,10 @@ spec:
           containerPort: 80
 #        - name: https
 #          containerPort: 443
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi

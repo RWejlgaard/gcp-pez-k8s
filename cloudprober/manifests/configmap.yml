@@ -9,7 +9,7 @@ data:
       name: "pez.sh"
       type: HTTP
       targets {
-        host_names: "pez.sh"
+        host_names: "pezsh.web.svc.cluster.local"
       }
       interval_msec: 500
       timeout_msec: 1000
@@ -18,7 +18,7 @@ data:
       name: "cloudprober"
       type: HTTP
       targets {
-        host_names: "cloudprober.pez.sh/status"
+        host_names: "cloudprober.monitoring.svc.cluster.local"
       }
       interval_msec: 500
       timeout_msec: 1000
@@ -27,7 +27,7 @@ data:
       name: "grafana"
       type: HTTP
       targets {
-        host_names: "grafana.pez.sh"
+        host_names: "grafana.monitoring.svc.cluster.local"
       }
       interval_msec: 500
       timeout_msec: 1000

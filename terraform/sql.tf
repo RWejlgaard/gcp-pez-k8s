@@ -12,10 +12,11 @@ resource "google_sql_database_instance" "pez-db" {
     tier = "db-f1-micro"
     disk_size = 50
     ip_configuration {
-       ipv4_enabled = true
+      ipv4_enabled = false
+      private_network = google_compute_network.default.id
       authorized_networks {
-        name = "vpn"
-        value = "${google_compute_address.static.address}/32"
+        name = "all"
+        value = "0.0.0.0/0"
       }
     }
   }

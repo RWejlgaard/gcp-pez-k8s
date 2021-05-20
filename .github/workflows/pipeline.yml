@@ -1,92 +1,92 @@
-name: 'Pipeline'
+# name: 'Pipeline'
 
-on:
-  push:
-    branches:
-    - master_DISABLE
-  pull_request:
+# on:
+#   push:
+#     branches:
+#     - master_DISABLE
+#   pull_request:
 
-jobs:
-  kube-apply:
-    name: 'Kubernetes Apply'
-    runs-on: ubuntu-latest
+# jobs:
+#   kube-apply:
+#     name: 'Kubernetes Apply'
+#     runs-on: ubuntu-latest
     
-    defaults:
-      run:
-        shell: bash
+#     defaults:
+#       run:
+#         shell: bash
     
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
     
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
-        export_default_credentials: true
+#     - name: Set up Cloud SDK
+#       uses: google-github-actions/setup-gcloud@master
+#       with:
+#         project_id: ${{ secrets.GCP_PROJECT_ID }}
+#         service_account_key: ${{ secrets.GCP_SA_KEY }}
+#         export_default_credentials: true
 
-    - name: Get GKE Credentials
-      uses: google-github-actions/get-gke-credentials@main
-      with:
-        cluster_name: k8s
-        location: europe-west1-c
+#     - name: Get GKE Credentials
+#       uses: google-github-actions/get-gke-credentials@main
+#       with:
+#         cluster_name: k8s
+#         location: europe-west1-c
         
-    - name: Copy kube-config to home
-      run: mkdir -p ~/.kube && cp ${{env.KUBECONFIG}} ~/.kube/config
+#     - name: Copy kube-config to home
+#       run: mkdir -p ~/.kube && cp ${{env.KUBECONFIG}} ~/.kube/config
 
-    - name: Install skaffold
-      run: gcloud components install skaffold --quiet
+#     - name: Install skaffold
+#       run: gcloud components install skaffold --quiet
 
-    - name: Build Skaffold pipeline
-      run: skaffold build
+#     - name: Build Skaffold pipeline
+#       run: skaffold build
 
-    - name: Run Skaffold pipeline
-      run: skaffold run
+#     - name: Run Skaffold pipeline
+#       run: skaffold run
 
-  terraform:
-    name: 'Terraform'
-    runs-on: ubuntu-latest
-    env:
-      working-directory: ./terraform
-    needs: kube-apply
+#   terraform:
+#     name: 'Terraform'
+#     runs-on: ubuntu-latest
+#     env:
+#       working-directory: ./terraform
+#     needs: kube-apply
       
-    defaults:
-      run:
-        shell: bash
+#     defaults:
+#       run:
+#         shell: bash
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+#     - name: Setup Terraform
+#       uses: hashicorp/setup-terraform@v1
 
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
-        export_default_credentials: true
+#     - name: Set up Cloud SDK
+#       uses: google-github-actions/setup-gcloud@master
+#       with:
+#         project_id: ${{ secrets.GCP_PROJECT_ID }}
+#         service_account_key: ${{ secrets.GCP_SA_KEY }}
+#         export_default_credentials: true
 
-    - name: Get GKE Credentials
-      uses: google-github-actions/get-gke-credentials@main
-      with:
-        cluster_name: k8s
-        location: europe-west1-c
+#     - name: Get GKE Credentials
+#       uses: google-github-actions/get-gke-credentials@main
+#       with:
+#         cluster_name: k8s
+#         location: europe-west1-c
         
-    - name: Copy kube-config to home
-      run: mkdir -p ~/.kube && cp ${{env.KUBECONFIG}} ~/.kube/config
+#     - name: Copy kube-config to home
+#       run: mkdir -p ~/.kube && cp ${{env.KUBECONFIG}} ~/.kube/config
 
-    - name: Terraform Init
-      run: terraform init
-      working-directory: ${{env.working-directory}}
+#     - name: Terraform Init
+#       run: terraform init
+#       working-directory: ${{env.working-directory}}
 
-    - name: Terraform Plan
-      run: terraform plan
-      working-directory: ${{env.working-directory}}
+#     - name: Terraform Plan
+#       run: terraform plan
+#       working-directory: ${{env.working-directory}}
 
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: terraform apply -auto-approve
-      working-directory: ${{env.working-directory}}
+#     - name: Terraform Apply
+#       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+#       run: terraform apply -auto-approve
+#       working-directory: ${{env.working-directory}}

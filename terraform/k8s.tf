@@ -23,6 +23,7 @@ resource "google_container_cluster" "k8s" {
       display_name = "vpn"
     }
   }
+  enable_shielded_nodes = true
 }
 
 resource "google_container_node_pool" "k8s-nodes" {

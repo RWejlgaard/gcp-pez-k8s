@@ -1,4 +1,4 @@
-FROM redis
+FROM redis:6.2-buster
 
 ADD redis.conf /etc/redis.conf
 
